@@ -3723,6 +3723,7 @@ __metadata:
     "@babel/core": ^7.16.12
     "@babel/preset-env": ^7.16.11
     "@babel/preset-typescript": ^7.16.7
+    "@jest/console": ^27.4.6
     "@types/jest": ^27.4.0
     babel-jest: ^27.4.6
     jest: ^27.4.7
