@@ -10,6 +10,13 @@
   "author": "Ilia Chernetskii <ichernetskii@evolution.com>",
   "license": "MIT",
   "private": true,
+  "quokka": {
+    "babel": {
+      "ts": true
+    },
+    "showValueOnSelection": true,
+    "showSingleInlineValue": true
+  },
   "devDependencies": {
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",

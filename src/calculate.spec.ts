@@ -30,7 +30,7 @@ describe("infix2postfix", () => {
 
         // error
         expect(() => infix2postfix("1+1+-2")).toThrowError(new MathsError(MathsError.values.ManyActionTokensError, 4, "+", "-"));
-        expect(() => infix2postfix("1+1-)j")).toThrowError(new MathsError(MathsError.values.UnexpectedTokenError));
+        expect(() => infix2postfix("1+1-)j")).toThrowError(new MathsError(MathsError.values.UnexpectedTokenError, "j"));
         expect(() => infix2postfix("1+2+(*2)")).toThrowError(new MathsError(MathsError.values.TokenAfterOpenParenthesesError, "*", 6));
     });
 });

@@ -21,17 +21,19 @@ export const infix2postfix = (infix: string): TokenPostfix[] => {
         .map(token => {
             if (isNumber(token)) return parseFloat(token);
             if (isTokenInfix(token)) return token;
-            throw new MathsError(MathsError.values.UnexpectedTokenError);
+            throw new MathsError(MathsError.values.UnexpectedTokenError, token);
         });
 
     const postfixArray: TokenPostfix[] = [];
     const stack: OperatorPriority[] = [];
     let level: number = 0;
     infixArray.forEach((token, idx) => {
+        const prevToken = infixArray[idx - 1];
         if (isNumber(token)) {
+            // check errors
+            // )1
             postfixArray.push(token);
         } else if (isOperator(token)) {
-            const prevToken = infixArray[idx - 1];
             // check errors
             // TODO: other errors
             if (isAction(token)) {
@@ -53,13 +55,13 @@ export const infix2postfix = (infix: string): TokenPostfix[] => {
             // if current priority <= in stack then add high priority from stack to output
             while (stack.length > 0 && operatorPriority[token] + level * (maxPriority + 1) <= stack[stack.length - 1].priority) {
                 const action = stack.pop();
-                if (action && action.operator !== "(" && action.operator != ")") postfixArray.push(action.operator);
+                if (action && action.operator !== "(" && action.operator !== ")") postfixArray.push(action.operator);
             }
             stack.push({
                 operator: token,
                 priority: operatorPriority[token] + level * (maxPriority + 1),
             });
-        } else throw new Error("Unexpected token");
+        } else throw new MathsError(MathsError.values.UnexpectedTokenError, token);
     });
 
     postfixArray.push(
